@@ -20,16 +20,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.sangeethasafetynets.in" }],
-        destination: "https://sangeethasafetynets.in/:path*",
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {
