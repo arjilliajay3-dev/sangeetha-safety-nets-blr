@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@theme {
+  /* Sangeetha Safety Nets: Burgundy & Silver Brand Palette */
+  --color-primary-burgundy: #6D1A36;
+  --color-burgundy-hover: #55142A;
+  --color-burgundy-deep: #420D20;
+  --color-burgundy-accent: #8A2F4D;
+  
+  --color-silver-accent: #B9BEC7;
+  --color-silver-subtle: #E5E7EB;
+  --color-silver-dark: #9CA3AF;
+  
+  --color-highlight-blush: #F6E9EE;
+  --color-highlight-blush-subtle: #FAF3F6;
+  
+  --color-body-text: #2F2F33;
+  --color-muted-text: #5A5A62;
+  
+  --color-success-green: #25D366;
+  --color-success-green-hover: #20BD5A;
+  
+  --color-bg-clean: #FFFFFF;
+  --color-bg-light: #FAFAFA;
+  --color-border-subtle: #E5E7EB;
+  
+  --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #2F2F33;
+  --primary-burgundy: #6D1A36;
+  --burgundy-accent: #8A2F4D;
+  --silver-accent: #B9BEC7;
+  --highlight-blush: #F6E9EE;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Custom premium scrollbar in Sangeetha Burgundy */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #6D1A36;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8A2F4D;
+}
+
+/* Text Gradient Utility in Sangeetha Burgundy to Secondary Accent */
+.text-gradient {
+  background: linear-gradient(135deg, #6D1A36 0%, #8A2F4D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary Burgundy Buttons */
+.btn-primary-burgundy, .btn-primary-accent, .btn-accent {
+  background: linear-gradient(135deg, #6D1A36 0%, #8A2F4D 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(109, 26, 54, 0.30);
+  transition: all 300ms ease;
+}
+.btn-primary-burgundy:hover, .btn-primary-accent:hover, .btn-accent:hover {
+  background: linear-gradient(135deg, #55142A 0%, #6D1A36 100%);
+  color: #FFFFFF;
+  box-shadow: 0 15px 30px rgba(109, 26, 54, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Silver Buttons (WCAG AA Compliant: Dark Text on Silver) */
+.btn-silver {
+  background: #B9BEC7;
+  color: #2F2F33;
+  font-weight: 800;
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(185, 190, 199, 0.35);
+  transition: all 300ms ease;
+}
+.btn-silver:hover {
+  background: #A9AFBA;
+  color: #1A1A1E;
+  transform: translateY(-2px);
+}
+
+.btn-secondary-burgundy {
+  background: transparent;
+  border: 2px solid #8A2F4D;
+  color: #6D1A36;
+  border-radius: 9999px;
+  transition: all 300ms ease;
+}
+.btn-secondary-burgundy:hover {
+  background: #6D1A36;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Card Hover Animation Utility */
+.card-premium {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
+  transition: all 300ms ease;
+}
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(109, 26, 54, 0.08);
+  border-color: #8A2F4D;
+}
+
+/* Custom scroll-margin for anchor links */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Continuous Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: marquee 16s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 25s linear infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.92; transform: scale(1.03); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+/* Periodic subtle shake animation for floating contact buttons */
+@keyframes shake-periodic-1 {
+  0%, 70%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  73% {
+    transform: rotate(-9deg) scale(1.05);
+  }
+  76% {
+    transform: rotate(9deg) scale(1.05);
+  }
+  79% {
+    transform: rotate(-6deg) scale(1.02);
+  }
+  82% {
+    transform: rotate(6deg) scale(1.02);
+  }
+  85% {
+    transform: rotate(-3deg);
+  }
+  88% {
+    transform: rotate(3deg);
+  }
+  91% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes shake-periodic-2 {
+  0%, 76%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  79% {
+    transform: rotate(-9deg) scale(1.05);
+  }
+  82% {
+    transform: rotate(9deg) scale(1.05);
+  }
+  85% {
+    transform: rotate(-6deg) scale(1.02);
+  }
+  88% {
+    transform: rotate(6deg) scale(1.02);
+  }
+  91% {
+    transform: rotate(-3deg);
+  }
+  94% {
+    transform: rotate(3deg);
+  }
+  97% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.animate-shake-loop-1 {
+  animation: shake-periodic-1 4.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.animate-shake-loop-2 {
+  animation: shake-periodic-2 4.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shake-loop-1,
+  .animate-shake-loop-2 {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /test/
+Disallow: /temp/
+Disallow: /development/
+Disallow: /_next/
+
+Sitemap: https://sangeethasafetynets.in/sitemap.xml

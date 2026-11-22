@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 100" width="540" height="100" fill="none">
+  <defs>
+    <linearGradient id="shieldBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#8A2F4D" />
+      <stop offset="50%" stopColor="#6D1A36" />
+      <stop offset="100%" stopColor="#420D20" />
+    </linearGradient>
+    <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="50%" stopColor="#E5E7EB" />
+      <stop offset="100%" stopColor="#B9BEC7" />
+    </linearGradient>
+    <!-- Geometric Netting Grid Pattern -->
+    <pattern id="shieldGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#B9BEC7" stroke-width="0.75" stroke-opacity="0.35" />
+    </pattern>
+  </defs>
+
+  <!-- Modern Geometric Safety Shield Badge -->
+  <g transform="translate(10, 8)">
+    <!-- Base Shield Shape -->
+    <path
+      d="M 42 2
+         L 76 16
+         C 76 56, 52 76, 42 82
+         C 32 76, 8 56, 8 16
+         Z"
+      fill="url(#shieldBurgundy)"
+      stroke="url(#silverGradient)"
+      stroke-width="3"
+    />
+    <!-- Subtle Grid Overlay -->
+    <path
+      d="M 42 5
+         L 73 17
+         C 73 54, 50 73, 42 79
+         C 34 73, 11 54, 11 17
+         Z"
+      fill="url(#shieldGrid)"
+      opacity="0.75"
+    />
+    <!-- S Monogram in Shield -->
+    <path
+      d="M 52 26
+         C 48 22, 39 21, 33 23
+         C 26 25, 23 31, 24 37
+         C 25 43, 33 45, 43 48
+         C 53 51, 57 55, 55 61
+         C 53 67, 44 69, 35 68
+         C 28 67, 23 63, 21 59"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="6.5"
+      stroke-linecap="round"
+    />
+    <!-- Silver Anchor Rivets -->
+    <circle cx="52" cy="26" r="3" fill="url(#silverGradient)" />
+    <circle cx="21" cy="59" r="3" fill="url(#silverGradient)" />
+  </g>
+
+  <!-- Clean Typography -->
+  <text x="105" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="900" fill="#6D1A36" letter-spacing="-0.5">
+    SANGEETHA
+  </text>
+  <text x="296" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="900" fill="#8A2F4D" letter-spacing="-0.5">
+    SAFETY
+  </text>
+  <text x="107" y="73" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#5A5A62" letter-spacing="3.5">
+    NETS &amp; INVISIBLE GRILLS
+  </text>
+</svg>

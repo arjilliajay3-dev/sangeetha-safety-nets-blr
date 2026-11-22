@@ -1,0 +1,15 @@
+{
+  "name": "Sangeetha Safety Nets",
+  "short_name": "Sangeetha Nets",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#6D1A36",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "start_url": "/"
+}
