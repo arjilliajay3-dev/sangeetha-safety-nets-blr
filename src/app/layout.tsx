@@ -51,11 +51,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
-    ? {
-        google: process.env.NEXT_PUBLIC_GSC_VERIFICATION,
-      }
-    : undefined,
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "gbeqREWX5mErl8WrC3m2SZNQOaaKXyqTcZHSmU3Ea9I",
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -103,6 +101,7 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className="scroll-smooth">
       <head>
+        <meta name="google-site-verification" content="gbeqREWX5mErl8WrC3m2SZNQOaaKXyqTcZHSmU3Ea9I" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
         <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
