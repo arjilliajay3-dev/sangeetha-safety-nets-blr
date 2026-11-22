@@ -52,7 +52,7 @@ export default function SideFloatingContact() {
           animate={{ opacity: 1, scale: 1, x: 0 }}
           exit={{ opacity: 0, scale: 0.6, x: -20 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed left-3 sm:left-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2.5 sm:gap-3 items-center pointer-events-auto select-none"
+          className="fixed left-3 sm:left-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-2.5 sm:gap-3 items-center pointer-events-auto select-none"
           role="region"
           aria-label="Quick contact side buttons"
         >
