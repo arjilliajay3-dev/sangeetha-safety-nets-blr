@@ -11,10 +11,10 @@ import {
   Zap,
   Sparkles,
   Award,
-  ArrowRight,
 } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { claimsConfig } from "@/data/claims";
+import { offerConfig } from "@/data/offers";
 import {
   PRICING_CONFIRMED,
   serviceEstimates,
@@ -31,16 +31,27 @@ export default function CostCalculator() {
   const minCost = minRate * areaSqFt;
   const maxCost = maxRate * areaSqFt;
 
+  const isOfferActive = offerConfig.active;
+  const discountRate = isOfferActive ? (100 - offerConfig.discountPercent) / 100 : 1;
+  const discountedMin = Math.round(minCost * discountRate);
+  const discountedMax = Math.round(maxCost * discountRate);
+
   const whatsappMessage = encodeURIComponent(
-    `Hello ${siteConfig.shortName}, I am looking for a project estimate for ${selectedService.name} covering roughly ${areaSqFt} ${selectedService.unit}. Please arrange an on-site dimensioning visit in ${siteConfig.city}.`
+    `Hello ${siteConfig.shortName}, I estimated ~${areaSqFt} ${selectedService.unit} for ${selectedService.name} (Est: ₹${isOfferActive ? discountedMin.toLocaleString("en-IN") : minCost.toLocaleString("en-IN")} - ₹${isOfferActive ? discountedMax.toLocaleString("en-IN") : maxCost.toLocaleString("en-IN")}). Please arrange a free doorstep laser measurement in ${siteConfig.city}.`
   );
+
+  const handleNumberInput = (val: number) => {
+    if (isNaN(val)) return;
+    const clamped = Math.max(20, Math.min(1000, val));
+    setAreaSqFt(clamped);
+  };
 
   return (
     <section className="bg-[#F8FAFC] py-20 scroll-mt-12" id="calculator">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F6E9EE]/60 text-[#6D1A36] border border-[#F6E9EE] text-xs font-extrabold uppercase tracking-widest mb-4 shadow-xs">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F6E9EE] text-[#6D1A36] border border-[#B9BEC7]/40 text-xs font-extrabold uppercase tracking-widest mb-4 shadow-xs">
             <Calculator className="w-4 h-4 text-[#6D1A36]" /> Transparent Estimation Tool
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
@@ -88,19 +99,33 @@ export default function CostCalculator() {
               </div>
             </div>
 
-            {/* Step 2: Slider for Area / Quantity */}
+            {/* Step 2: Slider & Number Input for Area / Quantity */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label htmlFor="installation-area-range" className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
                   2. Estimated Balcony / Window Span
                 </label>
-                <span className="text-sm font-black text-[#6D1A36] bg-[#F6E9EE] px-3 py-1 rounded-lg border border-[#B9BEC7]">
-                  {areaSqFt} {selectedService.unit}
-                </span>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="20"
+                    max="1000"
+                    value={areaSqFt}
+                    onChange={(e) => handleNumberInput(parseInt(e.target.value, 10))}
+                    aria-label={`Enter exact area in ${selectedService.unit}`}
+                    className="w-20 text-center font-black text-sm text-[#6D1A36] bg-[#F6E9EE] border border-[#B9BEC7] rounded-lg py-1 px-2 focus:outline-hidden focus:ring-2 focus:ring-[#6D1A36]"
+                  />
+                  <span className="text-xs font-bold text-slate-600">{selectedService.unit}</span>
+                </div>
               </div>
+
               <input
                 id="installation-area-range"
-                aria-label="Approximate Area or Dimension in Square Feet"
+                aria-label={`Approximate span in ${selectedService.unit}`}
+                aria-valuemin={40}
+                aria-valuemax={600}
+                aria-valuenow={areaSqFt}
+                aria-valuetext={`${areaSqFt} ${selectedService.unit}`}
                 type="range"
                 min="40"
                 max="600"
@@ -109,10 +134,10 @@ export default function CostCalculator() {
                 onChange={(e) => setAreaSqFt(Number(e.target.value))}
                 className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#6D1A36]"
               />
-              <div className="flex justify-between text-[11px] text-slate-400 font-semibold mt-1">
+              <div className="flex justify-between text-[11px] text-slate-400 font-semibold mt-1.5">
                 <span>Utility Balcony (40 sq.ft)</span>
-                <span>Standard Master Balcony (120 sq.ft)</span>
-                <span>Duplex / Penthouse Perimeter (600 sq.ft)</span>
+                <span>Master Balcony (120 sq.ft)</span>
+                <span>Duplex / Perimeter (600 sq.ft)</span>
               </div>
             </div>
 
@@ -147,8 +172,8 @@ export default function CostCalculator() {
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#8A2F4D] bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                  <Sparkles className="w-3.5 h-3.5" /> Calculated Scope
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-amber-300 bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300" /> Calculated Scope
                 </span>
                 <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-[#2F2F33] bg-[#B9BEC7] px-2.5 py-1 rounded-full border border-white/40">
                   {claimsConfig.warrantyDisplay}
@@ -161,14 +186,35 @@ export default function CostCalculator() {
               </p>
 
               {PRICING_CONFIRMED && minCost > 0 ? (
-                <div className="bg-[#420D20] rounded-2xl p-5 border border-[#55142A] mb-6 text-center">
-                  <span className="text-xs text-[#B9BEC7] font-bold uppercase tracking-wider block mb-1">
-                    Indicative Price Range
-                  </span>
-                  <div className="text-3xl sm:text-4xl font-black text-[#8A2F4D] tracking-tight">
-                    ₹{minCost.toLocaleString("en-IN")} - ₹{maxCost.toLocaleString("en-IN")}*
-                  </div>
-                  <span className="text-[10px] text-slate-400 block mt-2">
+                <div className="bg-[#420D20] rounded-2xl p-5 border border-[#55142A] mb-6 text-center space-y-2">
+                  {isOfferActive ? (
+                    <>
+                      <div className="flex items-center justify-center gap-2 mb-1">
+                        <span className="text-[11px] uppercase font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950">
+                          {offerConfig.title} Applied
+                        </span>
+                        <span className="text-xs text-slate-400 line-through">
+                          ₹{minCost.toLocaleString("en-IN")} - ₹{maxCost.toLocaleString("en-IN")}
+                        </span>
+                      </div>
+                      <span className="text-xs text-[#B9BEC7] font-bold uppercase tracking-wider block">
+                        Promotional Estimate
+                      </span>
+                      <div className="text-3xl sm:text-4xl font-black text-amber-300 tracking-tight">
+                        ₹{discountedMin.toLocaleString("en-IN")} - ₹{discountedMax.toLocaleString("en-IN")}*
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xs text-[#B9BEC7] font-bold uppercase tracking-wider block mb-1">
+                        Indicative Price Range
+                      </span>
+                      <div className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                        ₹{minCost.toLocaleString("en-IN")} - ₹{maxCost.toLocaleString("en-IN")}*
+                      </div>
+                    </>
+                  )}
+                  <span className="text-[11px] text-slate-300 block pt-1 border-t border-[#55142A]/60 leading-snug">
                     *{pricingDisclaimer}
                   </span>
                 </div>
@@ -181,19 +227,11 @@ export default function CostCalculator() {
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Accurate pricing depends on linear perimeter, masonry substrate type, elevation height, and cable spacing. Our local team conducts an exact measurement and issues a binding quotation.
                   </p>
-                  <div className="pt-2 border-t border-[#55142A]/60 flex flex-wrap gap-2 text-[11px] text-[#B9BEC7]">
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#8A2F4D]" /> Free Doorstep Measurement
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#8A2F4D]" /> No Obligation Quote
-                    </span>
-                  </div>
                 </div>
               )}
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 pt-2">
               <a
                 href={`https://wa.me/${siteConfig.whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
@@ -206,7 +244,7 @@ export default function CostCalculator() {
 
               <a
                 href={siteConfig.phoneTel}
-                className="w-full flex items-center justify-center gap-2 bg-[#420D20] hover:bg-[#55142A] text-white font-black py-3.5 px-4 rounded-xl shadow-md transition-all text-xs sm:text-sm cursor-pointer border border-[#8A2F4D]"
+                className="w-full flex items-center justify-center gap-2 bg-[#55142A] hover:bg-[#420D20] text-white font-black py-3.5 px-4 rounded-xl shadow-md transition-all text-xs sm:text-sm cursor-pointer border border-[#8A2F4D]"
               >
                 <PhoneCall className="w-4 h-4 text-white" />
                 <span>Call {siteConfig.phoneDisplay} Directly</span>

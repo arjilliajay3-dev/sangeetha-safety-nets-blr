@@ -1,26 +1,48 @@
 import { NextResponse } from "next/server";
 import * as z from "zod";
 
-// Zod Schema matching client-side validation
+// Shared contact validation schema
 const serverContactSchema = z.object({
-  name: z.string().min(2).max(100),
-  phone: z.string().regex(/^[6-9]\d{9}$/),
-  location: z.string().min(2).max(100),
+  name: z.string().min(2, "Name must be at least 2 characters").max(100),
+  phone: z.string().transform((val) => {
+    // Strip whitespace, hyphens, and leading +91 / 91 / 0
+    return val.replace(/[\s\-()]/g, "").replace(/^(\+91|91|0)/, "");
+  }).pipe(z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit Indian mobile number")),
+  location: z.string().min(2).max(150),
+  societyName: z.string().max(150).optional(),
+  apartmentName: z.string().max(150).optional(),
   service: z.string().min(2).max(100),
   message: z.string().max(1000).optional(),
+  // Honeypot fields to trap bots silently
+  botfield: z.string().max(100).optional(),
+  website_url: z.string().max(100).optional(),
+  // Marketing & attribution tracking
   utm_source: z.string().max(100).optional(),
   utm_medium: z.string().max(100).optional(),
   utm_campaign: z.string().max(100).optional(),
   gclid: z.string().max(150).optional(),
 });
 
-// Extremely simple, in-memory rate limiting map
-// Maps IP Address -> Timestamp[] of submissions
+// In-memory sliding window rate limiter: max 5 requests per IP per 10 minutes
 const rateLimitMap = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_WINDOW = 10 * 60 * 1000; // 10 minutes
 const MAX_REQUESTS_PER_WINDOW = 5;
 
-// Simple input sanitization function to strip common HTML tags (XSS block)
+// Clean up expired IP entries periodically
+function cleanRateLimitMap(now: number) {
+  if (rateLimitMap.size > 1000) {
+    for (const [ip, timestamps] of rateLimitMap.entries()) {
+      const active = timestamps.filter((time) => now - time < RATE_LIMIT_WINDOW);
+      if (active.length === 0) {
+        rateLimitMap.delete(ip);
+      } else {
+        rateLimitMap.set(ip, active);
+      }
+    }
+  }
+}
+
+// Input sanitization to prevent XSS injection
 function sanitizeString(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -33,53 +55,66 @@ function sanitizeString(str: string): string {
 
 export async function POST(request: Request) {
   try {
-    // Get client IP address for rate limiting
-    const ip = request.headers.get("x-forwarded-for") || "unknown-ip";
-    
-    // Rate Limiting Logic
+    // Client IP lookup for rate limiting
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "unknown-ip";
+
     const now = Date.now();
+    cleanRateLimitMap(now);
+
     const timestamps = rateLimitMap.get(ip) || [];
     const recentRequests = timestamps.filter((time) => now - time < RATE_LIMIT_WINDOW);
-    
+
     if (recentRequests.length >= MAX_REQUESTS_PER_WINDOW) {
       return NextResponse.json(
-        { error: "Too many requests. Please try again after a minute." },
+        { error: "Too many requests. Please wait a few minutes before submitting another quote request or call us directly at +91 99720 55520." },
         { status: 429 }
       );
     }
-    
-    recentRequests.push(now);
-    rateLimitMap.set(ip, recentRequests);
 
     const body = await request.json();
-    
+
+    // Check honeypot fields first - silently discard bot payloads without notifying bot
+    if (body.botfield || body.website_url) {
+      return NextResponse.json({
+        success: true,
+        message: "Quote request received.",
+      });
+    }
+
     // Server-side Zod validation
     const result = serverContactSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json(
-        { error: "Invalid form data submission." },
+        { error: "Invalid form data.", details: result.error.flatten() },
         { status: 400 }
       );
     }
 
-    // Input sanitization to prevent XSS payloads
-    const name = sanitizeString(result.data.name);
-    const phone = sanitizeString(result.data.phone);
-    const location = sanitizeString(result.data.location);
-    const service = sanitizeString(result.data.service);
-    const message = result.data.message ? sanitizeString(result.data.message) : "";
-    const utm_source = result.data.utm_source ? sanitizeString(result.data.utm_source) : "";
-    const utm_medium = result.data.utm_medium ? sanitizeString(result.data.utm_medium) : "";
-    const utm_campaign = result.data.utm_campaign ? sanitizeString(result.data.utm_campaign) : "";
-    const gclid = result.data.gclid ? sanitizeString(result.data.gclid) : "";
+    // Register submission timestamp against IP
+    recentRequests.push(now);
+    rateLimitMap.set(ip, recentRequests);
+
+    const data = result.data;
+    const name = sanitizeString(data.name);
+    const phone = sanitizeString(data.phone);
+    const location = sanitizeString(data.location);
+    const society = data.societyName || data.apartmentName ? sanitizeString(data.societyName || data.apartmentName || "") : "";
+    const service = sanitizeString(data.service);
+    const message = data.message ? sanitizeString(data.message) : "";
+    const utm_source = data.utm_source ? sanitizeString(data.utm_source) : "";
+    const utm_medium = data.utm_medium ? sanitizeString(data.utm_medium) : "";
+    const utm_campaign = data.utm_campaign ? sanitizeString(data.utm_campaign) : "";
+    const gclid = data.gclid ? sanitizeString(data.gclid) : "";
 
     const leadPayload = {
       to: "info.sangeethasafetynets@gmail.com",
-      subject: `New Safety Net Enquiry: ${name} (${service}) - ${location}`,
+      subject: `New Lead: ${name} (${service}) - ${location}${society ? ` [${society}]` : ""}`,
       lead: {
         name,
         phone,
         location,
+        society,
         service,
         message,
         utm_source,
@@ -92,7 +127,7 @@ export async function POST(request: Request) {
 
     console.log("Lead dispatched to info.sangeethasafetynets@gmail.com:", leadPayload);
 
-    // If RESEND_API_KEY is provided in production environment, dispatch email directly
+    // If RESEND_API_KEY is configured in production, send automated notification email
     if (process.env.RESEND_API_KEY) {
       try {
         await fetch("https://api.resend.com/emails", {
@@ -106,13 +141,15 @@ export async function POST(request: Request) {
             to: ["info.sangeethasafetynets@gmail.com"],
             subject: leadPayload.subject,
             html: `
-              <h2>New Lead Received from Website</h2>
+              <h2>New Safety Net / Invisible Grill Inquiry</h2>
               <p><strong>Customer Name:</strong> ${name}</p>
-              <p><strong>Phone Number:</strong> <a href="tel:${phone}">${phone}</a></p>
-              <p><strong>Location/Area:</strong> ${location}</p>
-              <p><strong>Required Service:</strong> ${service}</p>
-              <p><strong>Customer Note:</strong> ${message || "N/A"}</p>
-              <p><strong>Submission Time:</strong> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
+              <p><strong>Phone:</strong> <a href="tel:+91${phone}">+91 ${phone}</a></p>
+              <p><strong>Location / Area:</strong> ${location}</p>
+              ${society ? `<p><strong>Society / Apartment:</strong> ${society}</p>` : ""}
+              <p><strong>Requested Service:</strong> ${service}</p>
+              <p><strong>Notes:</strong> ${message || "Standard measurement inquiry"}</p>
+              ${utm_source ? `<p><strong>Attribution:</strong> ${utm_source} / ${utm_medium} / ${utm_campaign} (GCLID: ${gclid || "None"})</p>` : ""}
+              <p><strong>Received At:</strong> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
             `,
           }),
         });
@@ -121,9 +158,9 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: "Quote request successfully processed and routed to info.sangeethasafetynets@gmail.com." 
+    return NextResponse.json({
+      success: true,
+      message: "Quote request successfully processed. Our team will contact you shortly.",
     });
   } catch (error) {
     console.error("Server-side contact form API error:", error);

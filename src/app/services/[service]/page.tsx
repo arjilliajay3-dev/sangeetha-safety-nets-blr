@@ -10,7 +10,7 @@ import LightboxGallery from "@/components/ui/lightbox-gallery";
 import ContactForm from "@/components/sections/ContactForm";
 import ServicePromoTicker from "@/components/sections/ServicePromoTicker";
 
-import { generateBreadcrumbSchema, generateServiceSchema } from "@/utils/schema";
+import { generateBreadcrumbSchema, generateServiceSchema, generateFAQSchema } from "@/utils/schema";
 
 interface PageProps {
   params: Promise<{ service: string }>;
@@ -95,7 +95,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <div className="bg-slate-50 min-h-screen">
-      {/* Inject Dynamic Service and Breadcrumb Schemas */}
+      {/* Inject Dynamic Service, Breadcrumb, and FAQ Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbLinks)) }}
@@ -104,6 +104,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {serviceDetail.faqs && serviceDetail.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(generateFAQSchema(serviceDetail.faqs)) }}
+        />
+      )}
 
       {/* Sticky Bottom/Top Contact Bar */}
       <ServiceStickyBar name={serviceDetail.name} />

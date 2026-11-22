@@ -171,16 +171,18 @@ export default async function AreaDetailPage({ params }: PageProps) {
             <div className="flex flex-wrap gap-3 pt-2">
               <a
                 href="tel:+919972055520"
-                className="flex items-center justify-center gap-2 bg-[#8A2F4D] text-white font-extrabold px-6 py-3 rounded-full hover:bg-amber-200 text-xs shadow-lg transition-transform hover:scale-105"
+                data-track-cta="phone"
+                className="flex items-center justify-center gap-2 bg-white text-[#6D1A36] font-extrabold px-6 py-3 rounded-full hover:bg-slate-100 text-xs shadow-lg transition-transform hover:scale-105"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 text-[#6D1A36]" />
                 <span>Call +91 99720 55520</span>
               </a>
               <a
                 href={`https://wa.me/919972055520?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-full hover:bg-[#1EBE5D] text-xs shadow-lg transition-transform hover:scale-105"
+                data-track-cta="whatsapp"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-full hover:bg-[#20BD5A] text-xs shadow-lg transition-transform hover:scale-105"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp Free Quote</span>

@@ -62,7 +62,7 @@ export const blogData: Record<string, BlogArticle> = {
         answer: "Our technicians complete a standard apartment balcony installation within 3 to 4 hours, including diamond core drilling and vacuum dust clean-up.",
       },
     ],
-    relatedSlugs: ["balcony-safety-net-price-guide", "child-safety-for-apartments"],
+    relatedSlugs: ["balcony-safety-net-price-guide", "child-safety-for-apartments", "invisible-grills-vs-traditional-safety-nets"],
     relatedServices: ["balcony-invisible-grills", "window-invisible-grills"],
     relatedAreas: ["whitefield", "koramangala", "indiranagar"],
   },
@@ -105,7 +105,7 @@ export const blogData: Record<string, BlogArticle> = {
         answer: "While anti-pigeon nets keep birds out, dedicated child safety nets use thicker 1.5mm to 2.5mm cords with tighter anchor spacing to withstand heavy dynamic fall loads.",
       },
     ],
-    relatedSlugs: ["invisible-grill-cost-bangalore", "child-safety-for-apartments"],
+    relatedSlugs: ["invisible-grill-cost-bangalore", "child-safety-for-apartments", "pigeon-control-apartment-balcony-bangalore"],
     relatedServices: ["balcony-safety-nets", "children-safety-nets", "pigeon-safety-nets"],
     relatedAreas: ["hsr-layout", "electronic-city", "marathahalli"],
   },
@@ -148,9 +148,181 @@ export const blogData: Record<string, BlogArticle> = {
         answer: "Yes, our custom extruded aluminium tracks can be mounted inside window reveals or along exterior lintels, providing total fall protection without hindering window operation.",
       },
     ],
-    relatedSlugs: ["invisible-grill-cost-bangalore", "balcony-safety-net-price-guide"],
+    relatedSlugs: ["invisible-grill-cost-bangalore", "balcony-safety-net-price-guide", "pet-safety-nets-for-cats-dogs"],
     relatedServices: ["children-safety-nets", "children-invisible-grills", "balcony-safety-nets"],
     relatedAreas: ["whitefield", "jayanagar", "jp-nagar", "yelahanka"],
+  },
+  "pigeon-control-apartment-balcony-bangalore": {
+    slug: "pigeon-control-apartment-balcony-bangalore",
+    title: "Effective & Humane Pigeon Control for Bangalore Apartment Balconies",
+    publishedAt: "July 12, 2026",
+    author: "Sangeetha Safety Nets Bird Defense Division",
+    readingTime: "5 min read",
+    category: "safety-nets",
+    categoryLabel: "Pigeon Protection",
+    image: "/images/services/sangeetha-pigeon-safety-nets-bangalore.webp",
+    summary: "Discover proven, non-lethal methods to eliminate pigeon nesting, acidic droppings, and respiratory hazards from your apartment balcony in Bengaluru.",
+    introduction: "Pigeon nuisance has become an acute problem across Bengaluru high-rises from Marathahalli to Electronic City. Feral pigeons roost on air-conditioning ledges and balcony parapets, generating foul odor, corroding masonry, and releasing harmful airborne pathogens like histoplasmosis. Here is how professional exclusion systems solve the issue permanently.",
+    contentBlocks: [
+      {
+        heading: "Why DIY Repellents and CD Discs Fail",
+        text: "Hanging old compact discs, fake plastic owls, or applying chemical gels provides only temporary relief. Urban pigeons in Bengaluru quickly acclimatize to visual decoys within 48 to 72 hours, returning to their established nesting roosts behind AC outdoor condenser units.",
+      },
+      {
+        heading: "The Gold Standard: UV-Treated Garware Pigeon Netting",
+        text: "The only 100% permanent, humane solution is full-perimeter physical exclusion. High-tensile UV-stabilized copolymer netting with 1-inch or 1.25-inch mesh aperture prevents pigeons from entering or perching while remaining nearly invisible from street level.",
+      },
+      {
+        heading: "Polycarbonate and Stainless Steel Anti-Bird Spikes",
+        text: "For narrow window sills, parapet ledges, and AC outdoor compressor tops where full netting is impractical, marine-grade SS304 spikes mounted on UV-resistant polycarbonate bases prevent birds from landing without causing them physical injury.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do pigeon safety nets trap or harm the birds?",
+        answer: "No. Our netting acts strictly as a harmless physical barrier that denies birds landing space, encouraging them to find natural roosting sites away from residential buildings.",
+      },
+      {
+        question: "What mesh size is ideal for stopping pigeons in Bangalore?",
+        answer: "A 1-inch to 1.25-inch (25mm to 30mm) square mesh size is ideal to block pigeons and doves while maintaining unhindered airflow and natural light.",
+      },
+      {
+        question: "Can pigeon netting be cleaned easily?",
+        answer: "Yes, our UV copolymer nets do not absorb water or dust and can be easily washed down with water spray or a damp cloth during regular balcony cleaning.",
+      },
+    ],
+    relatedSlugs: ["balcony-safety-net-price-guide", "child-safety-for-apartments"],
+    relatedServices: ["pigeon-safety-nets", "anti-bird-spikes", "duct-area-safety-nets"],
+    relatedAreas: ["marathahalli", "electronic-city", "bellandur", "thanisandra"],
+  },
+  "invisible-grills-vs-traditional-safety-nets": {
+    slug: "invisible-grills-vs-traditional-safety-nets",
+    title: "Invisible Grills vs Traditional Safety Nets: High-Rise Balcony Comparison",
+    publishedAt: "July 16, 2026",
+    author: "Sangeetha Safety Nets Architectural Advisory",
+    readingTime: "6 min read",
+    category: "invisible-grills",
+    categoryLabel: "Architectural Comparison",
+    image: "/images/main-images/sangeetha-balcony-invisible-grills-bangalore.webp",
+    summary: "Compare costs, aesthetics, durability, fire-safety compliance, and maintenance between modern SS316 invisible wire grills and UV polymer safety netting.",
+    introduction: "When securing apartment balconies and expansive picture windows in Bengaluru, homeowners frequently face the dilemma of choosing between modern SS316 stainless steel invisible grills and UV-stabilized safety netting. Both solutions offer distinct advantages depending on your aesthetic expectations, budget, and society association rules.",
+    contentBlocks: [
+      {
+        heading: "Aesthetic Appeal & Unblocked Skyline Views",
+        text: "Invisible grills feature 2.5mm marine-grade stainless steel cables spaced at 2 or 3-inch intervals, offering a completely transparent architectural finish that preserves uninterrupted panoramic skyline views. Safety nets provide a discreet, lightweight grid that is practically unnoticeable from a distance but slightly visible up close.",
+      },
+      {
+        heading: "Tensile Strength, Breaking Load & Longevity",
+        text: "Marine SS316 invisible grills provide extraordinary tensile strength exceeding 400kg per strand, rendering them completely impervious to pet chewing, accidental impacts, or extreme winds. UV polymer safety nets deliver robust 140kg+ load resistance, engineered specifically for child and pet fall arrest.",
+      },
+      {
+        heading: "Investment Cost & Apartment Society Approvals",
+        text: "Safety nets range from ₹18 to ₹28 per square foot, making them an accessible, fast-turnaround choice for rental homes and budget-conscious families. Invisible grills range from ₹130 to ₹160 per square foot, serving as a permanent architectural luxury upgrade widely endorsed by premium Bengaluru builders like Sobha, Prestige, and Brigade.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can emergency services cut through invisible grills in case of fire?",
+        answer: "Yes. In the event of an emergency, fire and rescue personnel equipped with standard wire cutters can snip invisible grill cables in seconds, unlike traditional iron safety bars.",
+      },
+      {
+        question: "Which option is better for rental flats in Bangalore?",
+        answer: "Traditional safety netting is generally preferred by tenants due to lower installation costs and straightforward, non-invasive removal when vacating.",
+      },
+      {
+        question: "Do Bengaluru apartment associations allow invisible grills?",
+        answer: "Most high-rise associations explicitly permit invisible grills because they do not alter the uniform architectural facade of the building.",
+      },
+    ],
+    relatedSlugs: ["invisible-grill-cost-bangalore", "balcony-safety-net-price-guide"],
+    relatedServices: ["balcony-invisible-grills", "balcony-safety-nets", "window-invisible-grills"],
+    relatedAreas: ["whitefield", "hebbal", "sarjapur-road", "koramangala"],
+  },
+  "pet-safety-nets-for-cats-dogs": {
+    slug: "pet-safety-nets-for-cats-dogs",
+    title: "Pet Safety Nets: Protecting Cats & Dogs on High-Rise Balconies",
+    publishedAt: "July 20, 2026",
+    author: "Sangeetha Safety Nets Pet Protection Unit",
+    readingTime: "5 min read",
+    category: "safety-nets",
+    categoryLabel: "Pet Safety",
+    image: "/images/services/sangeetha-pet-safety-nets-bangalore.webp",
+    summary: "Prevent high-rise falls and feline 'high-rise syndrome' with claw-resistant, bite-proof pet safety nets and invisible grills in Bengaluru apartments.",
+    introduction: "Cats love sunning themselves on narrow balcony parapets, and curious dogs frequently jump against railings when watching birds or delivery vehicles. In Bengaluru's multi-tier towers, veterinarians routinely treat pets suffering from high-rise fall injuries. Discover how specialized pet barriers protect your beloved animals without confining them indoors.",
+    contentBlocks: [
+      {
+        heading: "Understanding High-Rise Syndrome in Felines",
+        text: "Cats possess an innate righting reflex, but falls from above the second floor often result in severe limb fractures, jaw trauma, or internal organ injuries. Installing dedicated pet safety netting creates a secure barrier that allows cats to enjoy fresh air safely.",
+      },
+      {
+        heading: "Heavy-Gauge Knotted Polymer vs Wire Grills for Pets",
+        text: "Standard mosquito mesh or thin plastic nets tear quickly under animal claws and teeth. Sangeetha Safety Nets utilizes reinforced 1.5mm+ high-density knotted polyethylene netting or chew-proof SS316 marine stainless steel invisible grills with close 2-inch spacing that prevents pets from squeezing through.",
+      },
+      {
+        heading: "Secure Floor-to-Ceiling Perimeter Anchoring",
+        text: "Pets are resourceful climbers. Effective pet containment requires full floor-to-ceiling sealing, anchored tightly along bottom concrete skirting so kittens or small dogs cannot slip underneath the barrier.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can aggressive dogs chew through the netting?",
+        answer: "For determined chewers or large dog breeds, we recommend our nylon-coated SS316 invisible grills, which are completely impervious to animal teeth.",
+      },
+      {
+        question: "Can cats climb the net without tearing it?",
+        answer: "Yes, our reinforced virgin polymer netting features high-tensile knot construction that easily holds the weight of a climbing cat without stretching or tearing.",
+      },
+      {
+        question: "Is the netting safe if pets lick or bite it?",
+        answer: "Yes, our netting materials are 100% non-toxic, chemical-free, and lead-free, ensuring complete safety for curious pets.",
+      },
+    ],
+    relatedSlugs: ["child-safety-for-apartments", "balcony-safety-net-price-guide"],
+    relatedServices: ["pet-safety-nets", "pet-invisible-grills", "balcony-safety-nets"],
+    relatedAreas: ["koramangala", "indiranagar", "hsr-layout", "whitefield"],
+  },
+  "space-saving-ceiling-cloth-drying-hangers": {
+    slug: "space-saving-ceiling-cloth-drying-hangers",
+    title: "Ceiling Cloth Drying Hangers: Space-Saving Laundry Guide for Modern Flats",
+    publishedAt: "July 24, 2026",
+    author: "Sangeetha Safety Nets Home Utilities Team",
+    readingTime: "4 min read",
+    category: "cloth-hangers",
+    categoryLabel: "Home Utilities",
+    image: "/images/services/sangeetha-ceiling-cloth-hangers-bangalore.webp",
+    summary: "Reclaim your balcony floor space with smooth pulley-operated stainless steel ceiling cloth drying racks in Bengaluru apartments.",
+    introduction: "In compact 2BHK and 3BHK high-rise apartments across Bengaluru, balconies often double as relaxation zones and laundry drying areas. Traditional folding floor stands occupy valuable walking space, tip over in windy weather, and clutter the aesthetic. Discover how overhead ceiling pulley drying racks maximize efficiency.",
+    contentBlocks: [
+      {
+        heading: "The Mechanism of Independent Pulley Hoists",
+        text: "Ceiling cloth drying hangers feature 4, 6, or 8 individual stainless steel pipes connected to smooth dual-nylon pulley wheels. Each pipe can be lowered individually to chest level for effortless hanging, then hoisted back up to the ceiling where warm rising air dries clothes rapidly.",
+      },
+      {
+        heading: "Rustproof SS304 Stainless Steel Construction",
+        text: "Unlike cheap powder-coated iron racks that rust and stain wet garments during the monsoon season, Sangeetha Safety Nets installs premium SS304 grade stainless steel tubes with durable nylon braided ropes engineered to hold heavy bedsheets, wet denim, and winter blankets.",
+      },
+      {
+        heading: "Freeing 100% of Balcony Floor Space",
+        text: "By utilizing the overhead ceiling envelope, you keep your balcony floor completely clear for potted plants, comfortable sit-out chairs, and uninterrupted children's play areas.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How much laundry weight can each ceiling pipe support?",
+        answer: "Each high-tensile SS304 pipe is engineered to support up to 5kg of wet laundry, allowing a standard 6-pipe rack to hold an entire washing machine load with ease.",
+      },
+      {
+        question: "Can ceiling hangers be installed on false ceilings or POP?",
+        answer: "Ceiling hangers require anchoring into structural concrete slabs. If you have a false ceiling, our technicians install custom threaded extension rods securely anchored to the true concrete ceiling above.",
+      },
+      {
+        question: "What length pipes are available for different balcony sizes?",
+        answer: "We offer customized lengths ranging from 4 feet up to 8 feet to fit compact utility balconies or expansive sit-outs perfectly.",
+      },
+    ],
+    relatedSlugs: ["balcony-safety-net-price-guide", "invisible-grill-cost-bangalore"],
+    relatedServices: ["ceiling-cloth-hangers", "balcony-cloth-hangers", "wall-mounted-cloth-hangers"],
+    relatedAreas: ["marathahalli", "electronic-city", "bellandur", "jp-nagar"],
   },
 };
 
